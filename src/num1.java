@@ -1,4 +1,4 @@
-public class Main
+public class num1
 {
     // tip: arguments are passed via the field below this editor
     public static void main(String[] args)
