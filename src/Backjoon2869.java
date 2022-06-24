@@ -1,26 +1,19 @@
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.Scanner;
 
 public class Backjoon2869 {
     public static void main(String[] args) throws IOException {
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st = new StringTokenizer(bf.readLine());
+        Scanner sc = new Scanner(System.in);
 
-        int a = Integer.parseInt(st.nextToken());
-        int b = Integer.parseInt(st.nextToken());
-        int v = Integer.parseInt(st.nextToken());
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        int v = sc.nextInt();
 
         int count=0;
 
-        if ((v-b)%(a-b)>0) count++;
-        v=(v-b)/(a-b);
-        count+=v;
+        if((v-b)%(a-b)>0) count++;
+        count+=(v-b)/(a-b);
 
-
-
-        bw.write(String.valueOf(count));
-        bw.flush();
-        bw.close();
+        System.out.println(count);
     }
 }
