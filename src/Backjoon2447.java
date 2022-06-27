@@ -1,47 +1,47 @@
+import java.io.*;
 import java.util.Scanner;
 
 public class Backjoon2447 {
 
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        int n=sc.nextInt();
-
-        star(n);
-
-    }
-
-    public static void star(int n){
-        if (n/3==1) {
-            System.out.print("*");
-        }
-
-        if (n>0) {
-            star(n / 3);
-            star(n / 3);
-            star(n / 3);
-            System.out.println();
-            star(n / 3);
-            space(n);
-            star(n / 3);
-            System.out.println();
-            star(n / 3);
-            star(n / 3);
-            star(n / 3);
-        }
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+     static char[][] arr;
 
 
-    }
+    public static void main(String[] args) throws IOException {
 
-        public void one(){
-            System.out.print("*");
-            System.out.print("*");
-            System.out.print("*");
-        }
+        int n=Integer.parseInt(br.readLine());
 
-        public static void space(int n){
-            for (int i=0; i<n; i++)
-                System.out.print(" ");
+        arr = new char[n][n];
+
+        for (int i=0; i<n; i++) {
+            for (int j = 0; j < n; j++) {
+                arr[i][j] = '*';
             }
-}
+        }
+
+        star(3*n, 0, 0);
+
+        for (int i=0; i<n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(arr[i][j]);
+            }
+            System.out.println();
+        }
+
+    }
+
+    public static void star(int n, int x, int y){
+
+        if (n==1)
+            return;
+
+
+            if (x%3==1 && y%3==1)
+                arr[x][y]=' ';
+            star(n / 3, (n / 3) + 3, (n / 3) + 3);
+
+
+        }
+    }
+
