@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.Scanner;
 
 public class Backjoon2447 {
 
@@ -15,33 +14,38 @@ public class Backjoon2447 {
         arr = new char[n][n];
 
         for (int i=0; i<n; i++) {
-            for (int j = 0; j < n; j++) {
-                arr[i][j] = '*';
+            for (int j=0; j<n; j++) {
+                arr[i][j] = ' ';
             }
         }
 
-        star(3*n, 0, 0);
+        star(n, 0, 0);
 
         for (int i=0; i<n; i++) {
             for (int j = 0; j < n; j++) {
-                System.out.print(arr[i][j]);
+                bw.write(arr[i][j]);
             }
-            System.out.println();
+            bw.write("\n");
         }
-
+        bw.flush();
+        bw.close();
     }
 
     public static void star(int n, int x, int y){
 
-        if (n==1)
+        if (n==1) {
+            arr[x][y]='*';
             return;
+        }
 
+        for (int i=0; i<3; i++){
+            for (int j=0; j<3; j++){
+                if (!(i==1 && j==1)){
+                    star(n/3, x+i*(n/3), y+j*(n/3));
+                }
 
-            if (x%3==1 && y%3==1)
-                arr[x][y]=' ';
-            star(n / 3, (n / 3) + 3, (n / 3) + 3);
-
-
+            }
         }
     }
+}
 
