@@ -7,46 +7,46 @@ public class Backjoon1018 {
         StringTokenizer st = new StringTokenizer(br.readLine());
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int M=Integer.parseInt(st.nextToken());
-        int N=Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
 
-        char[][] table = new char[M][N];
+        boolean[][] table = new boolean[M][N];
 
 
-        int resultCount=64;
+        int resultCount = 64;
+        int count;
 
-        for (int i=0; i<M; i++) {
+
+        for (int i = 0; i < M; i++) {           //입력값 비교해서 배열에 T/F저장
             String[] input = new String[M];
             input[i] = br.readLine();
             for (int j = 0; j < N; j++) {
-                table[i][j] = (input[i].charAt(j));
+                if (input[i].charAt(j)=='W')
+                    table[i][j] = true;
+                else
+                    table[i][j] = false;
             }
         }
 
-        for (int a=0; a<M-8; a++) {
-            for (int b = 0; b < N - 8; b++) {
-                int countA=0;
-                int countB=0;
+        for (int a = 0; a <= M - 8; a++) {                      //8*8 시작점 지정
+            for (int b = 0; b <= N - 8; b++) {
+                boolean firstcase = table[a][b];
+                int x=(a+b)%2;
+                count=0;
 
                 for (int i = a; i < a + 8; i++) {
                     for (int j = b; j < b + 8; j++) {
 
-
-                        if ((i + j) % 2 == 0) {    //짝수번째 박스
-                            if (table[i][j] == 'W') //1번 케이스
-                                countA++;
-                            if (table[i][j] == 'B') //2번 케이스
-                                countB++;
-                        } else {             //홀수 박스
-                            if (table[i][j] == 'B') //1번 케이스
-                                countA++;
-                            if (table[i][j] == 'W') //2번 케이스
-                                countB++;
+                        if ((i + j) % 2 == x) {
+                            if (table[i][j]!=firstcase)
+                                count ++;
+                        } else {
+                            if (table[i][j]==firstcase)
+                                count ++;
                         }
                     }
                 }
-                if (Math.min(countA, countB) < resultCount)
-                    resultCount = Math.min(countA, countB);
+                resultCount = Math.min(resultCount, count);
             }
         }
         bw.write(String.valueOf(resultCount));
