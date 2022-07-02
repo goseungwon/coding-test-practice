@@ -4,9 +4,9 @@ import java.util.StringTokenizer;
 
 public class Backjoon10814 {
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
+//        Scanner sc = new Scanner(System.in);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
+//
 //        int n = sc.nextInt();
 //        String[][] arr = new String[n][2];
 //
@@ -27,6 +27,8 @@ public class Backjoon10814 {
 //                    arr[i][1] = s1;
 //                }
 //            }
+//            bw.write(arr[i][0]);
+//            bw.write(arr[i][1]+"\n");
 //        }
 //
 //        for (int i=0; i<n; i++){
@@ -42,9 +44,11 @@ public class Backjoon10814 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st =new StringTokenizer(br.readLine());
 
-        int n = Integer.parseInt(br.readLine());
+        String[][] arr;
 
-        String[][] arr = new String[n][2];
+        int n = Integer.parseInt(st.nextToken());
+
+        arr = new String[n][2];
 
         for (int i=0; i<n; i++){
             for (int j=0; j<2; j++){
@@ -59,18 +63,15 @@ public class Backjoon10814 {
                     arr[j][0] = arr[i][0];
                     arr[i][0] = s1;
 
-                    String s2 = arr[j][1];
+                    s1 = arr[j][1];
                     arr[j][1] = arr[i][1];
-                    arr[i][1] = s2;
+                    arr[i][1] = s1;
                 }
+                bw.write(arr[i][0]);
+                bw.write(arr[i][1]+"\n");
             }
         }
-
-        for (int i=0; i<n; i++){
-            for (int j=0; j<2; j++){
-                System.out.print(arr[i][j]);
-            }
-            System.out.println();
-        }
+        bw.flush();
+        bw.close();
     }
 }
