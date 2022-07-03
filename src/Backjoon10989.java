@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Arrays;
 
 public class Backjoon10989 {
     public static void main(String[] args) throws IOException {
@@ -24,10 +25,12 @@ public class Backjoon10989 {
 //            }bw.write(arr[i]+"\n");
 //        }
 //        bw.flush();
-//        bw.close();
+//        bw.close();   내가 짠 알고리즘(기본정렬)
 
 
-        sort(arr);
+        //sort(arr);    피봇정렬 퍼옴
+
+        Arrays.sort(arr); // 라이브러리
         for (int i=0; i<n; i++)
             bw.write(arr[i]+"\n");
         bw.flush();
