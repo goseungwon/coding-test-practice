@@ -5,33 +5,33 @@ import java.util.StringTokenizer;
 public class Backjoon10814 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st =new StringTokenizer(br.readLine());
         StringBuilder sb = new StringBuilder();
-        Scanner sc = new Scanner(System.in);
 
-        String[][] arr = new String[101][100];
+        int age;
+        String name;
 
-//        int n = Integer.parseInt(br.readLine());
-        int n = sc.nextInt();
+        String[][] arr = new String[201][1000];
+
+        int n = Integer.parseInt(br.readLine());
 
        for (int i=0; i<n; i++){
-//               int age = Integer.parseInt(st.nextToken());
-//               String name = st.nextToken();
-               int age = sc.nextInt();
-               String name = sc.next();
+           StringTokenizer st =new StringTokenizer(br.readLine(), " ");
+           age = Integer.parseInt(st.nextToken());
+           name = st.nextToken();
 
-               int cursor = 0;
-               while (arr[age][cursor] != null) {
-                   cursor++;
-               }
-               arr[age][cursor] = name;
+           int cursor = 0;
+           while (arr[age][cursor] != null) {
+               cursor++;
+           }
+           arr[age][cursor] = name;
        }
-       for (int i=1; i<100;){
+
+       for (int i=1; i<201; i++){
            int cursor=0;
            while (arr[i][cursor]!=null){
                sb.append(i + " " + arr[i][cursor] + "\n");
                cursor++;
-           }i++;
+           }
        }
         System.out.println(sb);
     }
