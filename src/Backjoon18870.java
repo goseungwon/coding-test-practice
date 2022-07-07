@@ -5,69 +5,48 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Backjoon18870 {
+    static int[] num, num2;
+    static int n;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
 
-        int[] num, num2;
 
-        int n = Integer.parseInt(br.readLine());
-
-        num=new int[n];
-        num2=new int[n];
+        n = Integer.parseInt(br.readLine());
+        num = new int[n];
 
         StringTokenizer st = new StringTokenizer(br.readLine());
-        for (int i=0; i<n; i++){
-            num[i]=Integer.parseInt(st.nextToken());
-            num2[i]=num[i];
+        for (int i = 0; i < n; i++) {
+            num[i] = Integer.parseInt(st.nextToken());
         }
 
-//-----------------------------------------------------
-//        for (int i=0; i<n; i++){
-//            int count=0;
-//            for (int j=0; j<n; j++) {
-//                if (num[i] > num[j]) {
-//                    count++;
-//                }
-//            }
-//                sb.append(count+" ");
-//        }
-
-        Arrays.sort(num2);
-
-        for (int i=1; i<num2.length; i++){
-            if (num2[i]==num2[i-1]){
-                num2[i-1]=1000000000;
-            }
-        }
-        Arrays.sort(num2);
+        num2 = Arrays.stream(num).distinct().toArray(); //배열의 중복 없에기
+        Arrays.sort(num2);                              //정렬
 
         for (int i=0; i<n; i++){
-            for (int j=0; j<n; j++){
-                if (num[i]==num2[j]){
-                sb.append(j+" ");
-                break;
-                 }
-            }
+            sb.append(binary(num[i])+" ");
         }
 
-
-
-
-
-//---------------------------------------------------
-//
-//        for (int i=0; i<n; i++){
-//            int count=0;
-//            for (int j=0; j<n; j++){
-//                if (num[i]==num2[j]){
-//                sb.append(j-count+" ");
-//                break;
-//             }
-//                if (num2[j]==num2[j+1])
-//                    count++;
-//            }
-//        }
         System.out.print(sb);
     }
+
+
+    private static int binary(int num){
+        int left = 0;
+        int right = num2.length-1;
+
+        while  (left<=right){
+            int midindex=(left+right)/2;
+            int mid=num2[midindex];
+
+            if (num<mid)
+                right=midindex-1;
+            else if (num>mid)
+                left=midindex+1;
+            else return midindex;
+        }
+        return 0;
+    }
+
 }
