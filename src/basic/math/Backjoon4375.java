@@ -1,28 +1,32 @@
 package basic.math;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class Backjoon4375 {
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    static StringBuilder sb = new StringBuilder();
     public static void main(String[] args) throws IOException {
+    //    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Scanner sc = new Scanner(System.in);
+        StringBuilder sb = new StringBuilder();
 
-
-        for (int i=0; i<3; i++) {
-            int input = Integer.parseInt(br.readLine());
-            fun(input);
+        while (sc.hasNextInt()) {
+            int input=sc.nextInt();
+            System.out.println(fun(input));
+//            sb.append(fun(input)+"\n");
         }
-        System.out.println(sb);
+//        System.out.println(sb);
     }
 
-    private static void fun(int input) {
-        long num=111;
+    private static int fun(int input) {
+        long num=1;
+        int count=1;
+
         while(true){
-            if (num%input==0){
-                sb.append((int) Math.log10(num)+1+"\n");
-                break;
+            if (num%input!=0){
+                num=(num%input)*10+1;
+                count++;
             }else {
-                num=num*10+1;
+                return count;
             }
         }
     }
