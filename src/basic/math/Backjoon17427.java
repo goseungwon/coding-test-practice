@@ -9,10 +9,10 @@ public class Backjoon17427 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int output =0;
+        long output =0;
         int n= Integer.parseInt(br.readLine());
         for (int i=1; i<=n; i++){
-            output+=yaksu(i,1);
+            output+=i*(n/i);
         }
 
 
