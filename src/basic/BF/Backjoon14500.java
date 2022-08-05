@@ -55,11 +55,11 @@ public class Backjoon14500 {
 
 
     //탐색 메서드
-    public static int moveToRight(int startY, int startX, int sum){
+    public static int moveToRight(int startY, int startX, int sum) {
         startX++;
-        if (startX==x) return 0;
-        sum+=arr[startY][startX];
-        moveEverywhere(startY,startX,count);
+        if (startX == x) return 0;
+        sum += arr[startY][startX];
+        moveEverywhere(startY, startX, count);
         return sum;
     }
 
