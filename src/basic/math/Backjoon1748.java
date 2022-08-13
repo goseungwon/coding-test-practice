@@ -12,7 +12,10 @@ public class Backjoon1748 {
         int count=0;
 
         for (int i=8; i>=0; i--){
-            System.out.println(Math.pow(10,i));
+            System.out.println("10^i = "+Math.pow(10,i));
+            if(n>Math.pow(10,i)){
+
+            }
             count= count + (n/(int) Math.pow(10,i))*i;
             n%=(int) Math.pow(10,i);
             System.out.println("count = " + count);
