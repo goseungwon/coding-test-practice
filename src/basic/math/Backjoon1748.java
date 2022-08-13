@@ -11,16 +11,13 @@ public class Backjoon1748 {
         int n= Integer.parseInt(br.readLine());
         int count=0;
 
-        for (int i=8; i>=0; i--){
-            System.out.println("10^i = "+Math.pow(10,i));
-            if(n>Math.pow(10,i)){
-
+        for (int i=8; i>0; i--){
+            if (n >= Math.pow(10, i)) {
+                count += (i+1) * ((n - Math.pow(10, i)+1));
+                n = (int) Math.pow(10, i)-1;
             }
-            count= count + (n/(int) Math.pow(10,i))*i;
-            n%=(int) Math.pow(10,i);
-            System.out.println("count = " + count);
-            System.out.println("n = " + n);
-        }
+        }count+=n;
+
         System.out.println(count);
     }
 }
