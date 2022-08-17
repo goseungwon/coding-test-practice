@@ -2,59 +2,49 @@ package sequence.No11;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Backjoon2108 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int n = Integer.parseInt(br.readLine());
-        float count = 0;
-        int choia = 0;
-        int choib = 0;
-        int result = 10000;
-        boolean bool = false;
+        int tc = Integer.parseInt(br.readLine());
+        int[] arr = new int[tc];
 
-        int[] arr = new int[n];
-        for (int i = 0; i < n; i++) {
-            arr[i] = Integer.parseInt(br.readLine());
-            count += arr[i];
+        int total = 0;
+        boolean bool =false;
+        int result = 0;
+        int count=0;
+
+        for (int i=0; i<tc; i++){
+            int input = Integer.parseInt(br.readLine());
+            total += input;
+            arr[i]=input;
         }
-
         Arrays.sort(arr);
 
-        if (n == 1)
-            result = arr[0];
+        Map<Integer, Integer> map = new HashMap<>();
 
-        for (int i = 1; i < n; i++) {
-            if (arr[i] == arr[i - 1]) {
-                choia++;
-            }
-            if (arr[i] != arr[i - 1] || i == n) {
-                if (choib < choia) {
-                    choib = choia;
-                    result = arr[i];
-                    bool = false;
-                } else if (choia == choib && !bool) {
-                    if (arr[i] < result) {
-                        result = arr[i];
-                        bool = true;
-                    }else {
-                        bool = true;
-                    }
-                }
-                choia = 0;
+        for (Integer key : arr){
+            map.put(key, map.getOrDefault(key,0)+1);
+            if (map.get(key) > count){
+                count= map.get(key);
+                bool = false;
+                result=key;
+            } else if (map.get(key)==count && !bool) {
+                bool=true;
+                result=key;
             }
         }
 
+//        map.forEach((key, value)-> {
+//            System.out.println("key : value = " + key + " : " + value);
+//        });
 
-
-            bw.write(Math.round(count / n) + "\n");
-            bw.write(arr[arr.length / 2] + "\n");
-            bw.write(result + "\n");
-            bw.write(arr[n-1] - arr[0] +"\n");
-
-            bw.flush();
-            bw.close();
+        System.out.println(Math.round((double)total/tc));
+        System.out.println(arr[tc/2]);
+        System.out.println(result);
+        System.out.println(arr[tc-1] - arr[0]);
     }
 }
