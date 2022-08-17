@@ -13,17 +13,15 @@ public class Backjoon2108 {
         int[] arr = new int[tc];
 
         int total = 0;
-        int result=10000;
-        int curCount=1;
-        int count=0;
         boolean bool =false;
+        int result = 0;
+        int count=0;
 
         for (int i=0; i<tc; i++){
             int input = Integer.parseInt(br.readLine());
             total += input;
             arr[i]=input;
         }
-
         Arrays.sort(arr);
 
         Map<Integer, Integer> map = new HashMap<>();
@@ -39,7 +37,6 @@ public class Backjoon2108 {
                 result=key;
             }
         }
-
 
         System.out.println(Math.round((double)total/tc));
         System.out.println(arr[tc/2]);
