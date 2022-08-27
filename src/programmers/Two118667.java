@@ -33,6 +33,7 @@ public class Two118667 {
                 totalQB += queue2[i];
             }
 
+            
 
             while(true){
                 if(answer >2*queueLength) return -1;
