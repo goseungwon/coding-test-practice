@@ -34,7 +34,6 @@ public class Two118667 {
             }
 
             
-
             while(true){
                 if(answer >2*queueLength) return -1;
 
