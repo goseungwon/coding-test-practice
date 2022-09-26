@@ -9,5 +9,6 @@ public class Backjoon11654 {
         int a = sc.next().charAt(0);
 
         System.out.println(a);
+
     }
 }
