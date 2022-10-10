@@ -1,4 +1,4 @@
-package basic.BF;
+package basic.recursion;
 
 import java.io.BufferedReader;
 import java.io.IOException;
