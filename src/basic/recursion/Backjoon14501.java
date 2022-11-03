@@ -22,8 +22,11 @@ public class Backjoon14501 {
         }
 
         for (int i = day - 1; i >= 0; i--) {
-            if (i + time[i] > day) total[i] = total[i + 1];
-            else {
+            if (i + time[i] > day) {
+                total[i] = total[i + 1];
+                continue;
+            }
+            if (i + time[i] <= day) {
                 total[i] = Math.max(total[i + 1], pay[i] + total[i + time[i]]);
             }
         }
