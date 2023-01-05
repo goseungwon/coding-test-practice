@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 
 public class Backjoon12891 {
   static int[] checkedArr = new int[4];
-  static int[] checkArr = new int[4];
+  static int[] minArr = new int[4];
 
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -23,7 +23,7 @@ public class Backjoon12891 {
 
     st = new StringTokenizer(br.readLine());
     for (int i=0; i<4; i++) {
-      checkArr[i] = Integer.parseInt(st.nextToken());
+      minArr[i] = Integer.parseInt(st.nextToken());
     }
 
     for (int i=pwLength-1; i<inputLength; i++) {
@@ -56,11 +56,10 @@ public class Backjoon12891 {
   }
 
   private static boolean valid() {
-    for (int i=0; i< checkArr.length; i++) {
-      if (checkedArr[i] < checkArr[i]) {
-        return false;
-      }
-    }
-    return true;
+    return
+        checkedArr[0]>=minArr[0] &&
+        checkedArr[1]>=minArr[1] &&
+        checkedArr[2]>=minArr[2] &&
+        checkedArr[3]>=minArr[3];
   }
 }
