@@ -13,32 +13,36 @@ public class Backjoon1874 {
 
         Stack<Integer> stack = new Stack<>();
 
+        for (int i=0; i<number; i++) {
+            arr[i] = Integer.parseInt(br.readLine());
+        }
+
+        int cursor = 0;
         int value = 1;
         boolean isGood = true;
 
-        for (int i=0; i<number; i++) {
-            arr[i] = Integer.parseInt(br.readLine());
-
-            if (isGood) {
-                while (value <= arr[i]) {
-                    stack.push(value++);
-                    sb.append("+\n");
-                }
-                if (stack.empty()) {
-                    isGood = false;
-                    break;
-                }
-                while (stack.peek() >= arr[i]) {
-                    stack.pop();
-                    sb.append("-\n");
-                    if (stack.empty()) break;
-                }
+        while (cursor<number) {
+            if (stack.empty() || stack.peek()<arr[cursor]) {
+                stack.push(value);
+                value++;
+                sb.append("+\n");
+            } else if (stack.peek() == arr[cursor]) {
+                stack.pop();
+                cursor++;
+                sb.append("-\n");
+            } else {
+                isGood = false;
+                break;
             }
         }
+
         if (isGood) {
             System.out.println(sb);
         } else {
             System.out.println("NO");
         }
+
+
     }
 }
+
