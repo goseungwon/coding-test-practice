@@ -1,3 +1,5 @@
+package programmerstest;
+
 public class CodingTest3 {
     static boolean[][] visited;
     static int[][] field;
