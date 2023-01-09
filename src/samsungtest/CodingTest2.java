@@ -8,18 +8,20 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class CodingTest2 {
+    static Queue<Character> queue = new LinkedList<>();
+    static StringBuilder sb = new StringBuilder();
+    static  String max;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
         int testCase = Integer.parseInt(br.readLine());
 
         for (int index=1; index<=testCase; index++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            Queue<Character> queue = new LinkedList<>();
             boolean isFirstZero = true;
             boolean trigger = false;
 
-            String max = st.nextToken();
+            max = st.nextToken();
             char x = st.nextToken().charAt(0);
             char y = st.nextToken().charAt(0);
             int inputLength = max.length();
@@ -45,17 +47,26 @@ public class CodingTest2 {
 
                 else {
                     if (!isFirstZero) {
-                        queue.add('0');
                         if (current != '0') trigger = true;
+                        else if (!backTracking(i)) break;
+                        else trigger = true;
                     } else trigger = true;
                 }
             }
-            outputBuilder(sb, index, queue);
+            outputBuilder(index);
         }
         System.out.println(sb);
     }
 
-    private static void outputBuilder(StringBuilder sb, int index, Queue<Character> queue) {
+    private static boolean backTracking(int i) {
+        if (queue.isEmpty()) return false;
+
+        char current = max.charAt(i);
+
+        if (current>y)
+    }
+
+    private static void outputBuilder(int index) {
         sb.append("#" + index + " ");
 
         if (queue.isEmpty()) {
@@ -67,4 +78,6 @@ public class CodingTest2 {
         }
         sb.append("\n");
     }
+    
+    
 }
