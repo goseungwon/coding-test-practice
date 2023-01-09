@@ -3,14 +3,15 @@ package samsungtest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class CodingTest2 {
-    static Queue<Character> queue = new LinkedList<>();
+    static Deque<Character> queue = new LinkedList<>();
     static StringBuilder sb = new StringBuilder();
     static  String max;
+    static char x,y;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -22,8 +23,8 @@ public class CodingTest2 {
             boolean trigger = false;
 
             max = st.nextToken();
-            char x = st.nextToken().charAt(0);
-            char y = st.nextToken().charAt(0);
+            x = st.nextToken().charAt(0);
+            y = st.nextToken().charAt(0);
             int inputLength = max.length();
 
             for (int i=0; i<inputLength; i++) {
@@ -47,8 +48,7 @@ public class CodingTest2 {
 
                 else {
                     if (!isFirstZero) {
-                        if (current != '0') trigger = true;
-                        else if (!backTracking(i)) break;
+                        if (!backTracking(i)) break;
                         else trigger = true;
                     } else trigger = true;
                 }
@@ -60,10 +60,31 @@ public class CodingTest2 {
 
     private static boolean backTracking(int i) {
         if (queue.isEmpty()) return false;
+        if (--i<0) return false;
 
         char current = max.charAt(i);
 
-        if (current>y)
+        if (current>y) {
+            queue.add(y);
+            return true;
+        }
+        else if (current == y) {
+            queue.pollLast();
+            queue.add(x);
+            queue.add(y);
+            return true;
+        }
+        else if (current>x) {
+            queue.add(y);
+            return true;
+        }
+        else if (current==x) {
+            queue.pollLast();
+            if (queue.isEmpty()) { queue.add(y); return true;}
+            if (backTracking(i)) queue.add(y);
+            else return false;
+        }
+        return false;
     }
 
     private static void outputBuilder(int index) {
@@ -78,6 +99,4 @@ public class CodingTest2 {
         }
         sb.append("\n");
     }
-    
-    
 }
