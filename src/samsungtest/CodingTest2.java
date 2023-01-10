@@ -3,15 +3,17 @@ package samsungtest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.LinkedList;
 import java.util.StringTokenizer;
 
 public class CodingTest2 {
-    static Deque<Character> queue = new LinkedList<>();
+
+    static Deque<Character> deque = new ArrayDeque<>();
     static StringBuilder sb = new StringBuilder();
     static  String max;
     static char x,y;
+    static int count;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -21,6 +23,7 @@ public class CodingTest2 {
             StringTokenizer st = new StringTokenizer(br.readLine());
             boolean isFirstZero = true;
             boolean trigger = false;
+            count = 0;
 
             max = st.nextToken();
             x = st.nextToken().charAt(0);
@@ -29,9 +32,8 @@ public class CodingTest2 {
 
             for (int i=0; i<inputLength; i++) {
                 char current = max.charAt(i);
-
                 if (current>=y || trigger) {
-                    queue.add(y);
+                    deque.add(y);
                     isFirstZero = false;
                     if (current!=y) trigger = true;
                 }
@@ -41,15 +43,18 @@ public class CodingTest2 {
                 }
 
                 else if (current>=x) {
-                    queue.add(x);
+                    deque.add(x);
                     isFirstZero = false;
                     if (current!=x) trigger = true;
                 }
 
                 else {
                     if (!isFirstZero) {
-                        if (!backTracking(i)) break;
-                        else trigger = true;
+                        if (!backTracking(i)) break;  //TODO 여기서 문제 발생
+                        else {
+                            trigger = true;
+                            fillDeque();
+                        }
                     } else trigger = true;
                 }
             }
@@ -58,43 +63,49 @@ public class CodingTest2 {
         System.out.println(sb);
     }
 
-    private static boolean backTracking(int i) {
-        if (queue.isEmpty()) return false;
-        if (--i<0) return false;
-
-        char current = max.charAt(i);
-
-        if (current>y) {
-            queue.add(y);
-            return true;
+    private static void fillDeque() {
+        for (int i=0; i<count; i++) {
+            deque.add(y);
         }
-        else if (current == y) {
-            queue.pollLast();
-            queue.add(x);
-            queue.add(y);
-            return true;
-        }
-        else if (current>x) {
-            queue.add(y);
-            return true;
-        }
-        else if (current==x) {
-            queue.pollLast();
-            if (queue.isEmpty()) { queue.add(y); return true;}
-            if (backTracking(i)) queue.add(y);
-            else return false;
-        }
-        return false;
     }
+
+    private static boolean backTracking(int i) {
+        boolean flag = true;
+        while(flag) {
+             if (--i<0) return false;
+             if (deque.isEmpty()) return false;
+
+            char current = max.charAt(i);
+
+            if (current == y) {
+                deque.pollLast();
+                deque.add(x);
+                deque.add(y);
+                break;
+            }
+            else if (current == x) {
+                deque.pollLast();
+                if (deque.isEmpty()) { deque.add(y); return true;}
+                count++;
+            }
+
+            else {
+                deque.add(y);
+                break;
+            }
+        }
+        return true;
+    }
+
 
     private static void outputBuilder(int index) {
         sb.append("#" + index + " ");
 
-        if (queue.isEmpty()) {
+        if (deque.isEmpty()) {
             sb.append("-1");
         } else {
-            while (!queue.isEmpty()) {
-                sb.append(queue.poll());
+            while (!deque.isEmpty()) {
+                sb.append(deque.poll());
             }
         }
         sb.append("\n");
