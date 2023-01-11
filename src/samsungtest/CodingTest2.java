@@ -50,12 +50,11 @@ public class CodingTest2 {
 
                 else {
                     if (!isFirstZero) {
-                        if (!backTracking(i)) break;  //TODO 여기서 문제 발생
+                        if (!backTracking(i)) break;
                         else {
-                            trigger = true;
                             fillDeque();
                         }
-                    } else trigger = true;
+                    } trigger = true;
                 }
             }
             outputBuilder(index);
@@ -70,10 +69,8 @@ public class CodingTest2 {
     }
 
     private static boolean backTracking(int i) {
-        boolean flag = true;
-        while(flag) {
-             if (--i<0) return false;
-             if (deque.isEmpty()) return false;
+        while(true) {
+             if (--i<0 || deque.isEmpty()) return false;
 
             char current = max.charAt(i);
 
@@ -99,7 +96,7 @@ public class CodingTest2 {
 
 
     private static void outputBuilder(int index) {
-        sb.append("#" + index + " ");
+        sb.append("#").append(index).append(" ");
 
         if (deque.isEmpty()) {
             sb.append("-1");
