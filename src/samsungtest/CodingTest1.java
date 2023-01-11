@@ -9,8 +9,7 @@ public class CodingTest1 {
   static int line, row;
   static int[][] country;
   static boolean[] isVisit = new boolean[26];
-  static int[] moveToX = { -1, 1, 0, 0 };
-  static int[] moveToY = { 0, 0, -1, 1 };
+  static int[] move = { -1, 1, 0, 0 };
   static int souvenir;
 
   public static void main(String[] args) throws IOException {
@@ -18,17 +17,18 @@ public class CodingTest1 {
     StringBuilder sb = new StringBuilder();
     int testCase = Integer.parseInt(br.readLine());
 
-    souvenir = 0;
-    for (int test=0; test<testCase; test++) {
+    for (int test=1; test<=testCase; test++) {
+    souvenir = 1;
+    isVisit = new boolean[26];
     StringTokenizer st = new StringTokenizer(br.readLine());
 
     line = Integer.parseInt(st.nextToken());
     row = Integer.parseInt(st.nextToken());
     country = new int[line][row];
-    arrayInput(br);
 
+    arrayInput(br);
     explore(0, 0, 0);
-    sb.append("#" + (test+1) + " " + souvenir + "\n");
+    sb.append("#").append(test).append(" ").append(souvenir).append("\n");
     }
     System.out.println(sb);
   }
@@ -48,8 +48,8 @@ public class CodingTest1 {
     } else {
       isVisit[country[x][y]] = true;
       for (int i = 0; i < 4; i++) {
-        int curX = x + moveToX[i];
-        int curY = y + moveToY[i];
+        int curX = x + move[i];
+        int curY = y + move[3-i];
 
         if (curX >= 0 && curY >= 0 && curX < line && curY < row) {
           explore(curX, curY, count+1);
