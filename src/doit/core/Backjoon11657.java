@@ -1,4 +1,4 @@
-package doit;
+package doit.core;
 
 import java.io.*;
 import java.util.Arrays;

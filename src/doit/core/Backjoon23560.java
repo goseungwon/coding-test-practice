@@ -1,4 +1,4 @@
-package doit;
+package doit.core;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
