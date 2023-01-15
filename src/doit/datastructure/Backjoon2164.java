@@ -1,7 +1,7 @@
 package doit.datastructure;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Backjoon2164 {
@@ -9,17 +9,16 @@ public class Backjoon2164 {
 		Scanner sc = new Scanner(System.in);
 
 		int number = sc.nextInt();
-		Deque<Integer> deque = new ArrayDeque<>();
+		Queue<Integer> queue = new LinkedList<>();
 
 		for (int i=1; i<=number; i++) {
-			deque.add(i);
+			queue.add(i);
 		}
 
-		while (deque.size() != 1) {
-			deque.removeFirst();
-			deque.add(deque.getFirst());
-			deque.removeFirst();
+		while (queue.size() != 1) {
+			queue.remove();
+			queue.add(queue.poll());
 		}
-		System.out.println(deque.getFirst());
+		System.out.println(queue.peek());
 	}
 }
