@@ -4,12 +4,12 @@ public class W1D2_SINGLE_LINKED_LIST {
 
     private final static int MAX_NODE = 10000;
 
-    private Node[] node = new Node[MAX_NODE];
+    private Node1[] node = new Node1[MAX_NODE];
     private int nodeCnt = 0;
-    private Node head;
+    private Node1 head;
 
-    public Node getNode(int data) {
-        node[nodeCnt] = new Node(data);
+    public Node1 getNode(int data) {
+        node[nodeCnt] = new Node1(data);
         return node[nodeCnt++];
     }
 
@@ -23,7 +23,7 @@ public class W1D2_SINGLE_LINKED_LIST {
             return;
         }
 
-        Node nHead = getNode(data);
+        Node1 nHead = getNode(data);
         nHead.next = head;
         head = nHead;
     }
@@ -34,12 +34,12 @@ public class W1D2_SINGLE_LINKED_LIST {
             return;
         }
 
-        Node curNode = head; // head 찾아서 tail 찾아야함
+        Node1 curNode = head; // head 찾아서 tail 찾아야함
         while (curNode.next != null) { // 현재 node next가 null인 지점 찾기
             curNode = curNode.next; // null이 아니라면 다음 next node가 cur
         }
 
-        Node nTail = getNode(data); // 새로운 tail 생성
+        Node1 nTail = getNode(data); // 새로운 tail 생성
         curNode.next = nTail;
     }
 
@@ -53,8 +53,8 @@ public class W1D2_SINGLE_LINKED_LIST {
             return;
         }
 
-        Node curNode = head;
-        Node preNode = null;
+        Node1 curNode = head;
+        Node1 preNode = null;
         int cnt = 1;
         while (true) {
             if (cnt == num - 1) {
@@ -70,7 +70,7 @@ public class W1D2_SINGLE_LINKED_LIST {
             cnt++;
         }
 
-        Node nNode = getNode(data);
+        Node1 nNode = getNode(data);
         preNode.next = nNode;
         nNode.next = curNode;
 
@@ -82,9 +82,9 @@ public class W1D2_SINGLE_LINKED_LIST {
             return;
         }
 
-        Node curNode = head;
-        Node preNode = null;
-        Node nextNode = null;
+        Node1 curNode = head;
+        Node1 preNode = null;
+        Node1 nextNode = null;
         while (true) {
             if (curNode == null)
                 return;
@@ -102,7 +102,7 @@ public class W1D2_SINGLE_LINKED_LIST {
     }
 
     public int getList(int[] output) {
-        Node curr = head;
+        Node1 curr = head;
         if (curr == null) return 0;
         int count = 0;
         while (curr != null) {
