@@ -3,65 +3,72 @@ package programmers;
 import java.util.*;
 
 public class 표_편집 {
-	class Temp {
-		int tempIndex, tempValue;
+	public class Temp {
+		int preIndex, value, postIndex;
 
-		Temp(int index, int value) {
-			this.tempIndex = index;
-			this.tempValue = value;
+		public Temp(int pre, int value, int post) {
+			this.preIndex = pre;
+			this.value = value;
+			this.postIndex = post;
 		}
 	}
 
 	//n 노드 개수, k 첫 커서, cmd 명령어 집합
 	public String solution(int n, int k, String[] cmd) {
-		List<Integer> list = new LinkedList<>();
-		List<Boolean> isDeleted = new ArrayList<>();
+		int[] pre = new int[n];
+		int[] post = new int[n];
+
+		// arr setting
+		for (int i = 0; i < n; i++) {
+			pre[i] = i - 1;
+			post[i] = i + 1;
+		}
+		post[n - 1] = -1;
 
 		Stack<Temp> stack = new Stack<>();
 
-		//list setting
-		for(int i=0; i<n; i++) {
-			list.add(i);
-			isDeleted.add(false);
-		}
+		StringBuilder sb = new StringBuilder("O".repeat(n));
 
-		int cursor = k;
+		for (String command : cmd) {
+			switch (command.charAt(0)) {
+				case 'U' -> {
+					int value = Integer.parseInt(command.substring(2));
+					while (value-- > 0) {
+						k = pre[k];
+					}
+				}
 
-		for(String command:cmd) {
-			switch(command.charAt(0)) {
-				case 'U':
-					cursor -= command.charAt(2) - '0';
-					break;
+				case 'D' -> {
+					int value = Integer.parseInt(command.substring(2));
+					while (value-- > 0) {
+						k = post[k];
+					}
+				}
 
-				case 'D':
-					cursor += command.charAt(2) - '0';
-					break;
+				case 'C' -> {
+					stack.push(new Temp(pre[k], k, post[k]));
+					if (pre[k] != -1)
+						post[pre[k]] = post[k];
+					if (post[k] != -1)
+						pre[post[k]] = pre[k];
+					sb.setCharAt(k, 'X');
 
-				case 'C':
-					stack.add(new Temp(cursor, list.get(cursor)));
-					isDeleted.set(list.get(cursor), true);
+					if (post[k] != -1)
+						k = post[k];
+					else
+						k = pre[k];
+				}
 
-					list.remove(cursor);
-					if(cursor>=list.size()) cursor--;
-					break;
-
-				case 'Z':
+				case 'Z' -> {
 					Temp temp = stack.pop();
-					if (temp.tempIndex<= cursor) cursor++;
-					isDeleted.set(temp.tempValue, false);
-					list.add(temp.tempIndex, temp.tempValue);
-					break;
+					if (temp.preIndex != -1)
+						post[temp.preIndex] = temp.value;
+					if (temp.postIndex != -1)
+						pre[temp.postIndex] = temp.value;
+					sb.setCharAt(temp.value, 'O');
+				}
 
 			}
-		}
-
-		StringBuilder sb = new StringBuilder();
-		for(Boolean b:isDeleted) {
-			if(b) {
-				sb.append("X");
-				continue;
-			}
-			sb.append("O");
 		}
 
 		return sb.toString();
