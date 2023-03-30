@@ -1,9 +1,8 @@
 package programmers;
 
-public class 할인_행사 {
-	public static void main(String[] args) {
+import java.util.*;
 
-	}
+public class 할인_행사 {
 	public int solution(String[] want, int[] number, String[] discount) {
 		int answer = 0;
 
@@ -18,7 +17,7 @@ public class 할인_행사 {
 			}
 		}
 
-		if(number == count) answer++;
+		if(Arrays.equals(number, count)) answer++;
 
 		for(int i=10; i<discount.length; i++) {
 			for (int j=0; j<want.length; j++) {
@@ -33,7 +32,7 @@ public class 할인_행사 {
 					break;
 				}
 			}
-			if(number == count) answer++;
+			if(Arrays.equals(number,count)) answer++;
 		}
 
 
