@@ -1,4 +1,4 @@
-package programmerstest;
+package programmers.programmerstest;
 
 import java.io.BufferedReader;
 import java.io.IOException;

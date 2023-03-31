@@ -1,4 +1,4 @@
-package programmerstest;
+package programmers.programmerstest;
 
 public class CodingTest3 {
     static boolean[][] visited;

@@ -1,4 +1,4 @@
-package programmerstest;
+package programmers.programmerstest;
 
 import java.util.ArrayList;
 import java.util.Scanner;
