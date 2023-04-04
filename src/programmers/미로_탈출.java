@@ -22,44 +22,24 @@ public class 미로_탈출 {
 		for (int i=0; i<maps.length; i++) {
 			for (int j=0; j<maps[i].length(); j++) {
 				if (maps[i].charAt(j) == 'S') {
-					startX = i; //아이
-					startY = j; //제이
+					startX = i;
+					startY = j;
 					break;
 				}
 			}
 			if (startY >= 0) break;
 		}
 
-		int lever = findLever(startX, startY, maps);
+		int lever = bfs(startX, startY, 0, 'L', maps);
 		if (lever < 0) {
 			return lever;
 		}
 		isVisit = new boolean[maps.length][maps[0].length()];
 
-		return findExit(startX, startY, lever, maps);
+		return bfs(startX, startY, lever, 'E', maps);
 	}
 
-	int findLever (int x, int y, String[] maps) {
-		Queue<Node> queue = new ArrayDeque<>();
-		queue.add(new Node(x,y, 0));
-		isVisit[x][y] = true;
-
-		while(!queue.isEmpty()) {
-			Node node = queue.poll();
-
-			if (maps[node.x].charAt(node.y) =='L') {
-				startX = node.x;
-				startY = node.y;
-				return node.coast;
-			}
-
-			bfs(maps, queue, node);
-
-		}
-		return -1;
-	}
-
-	int findExit (int x, int y, int coast, String[] maps) {
+	int bfs (int x, int y, int coast, char c, String[] maps) {
 		Queue<Node> queue = new ArrayDeque<>();
 		queue.add(new Node(x,y, coast));
 		isVisit[x][y] = true;
@@ -67,28 +47,24 @@ public class 미로_탈출 {
 		while(!queue.isEmpty()) {
 			Node node = queue.poll();
 
-			if (maps[node.x].charAt(node.y) =='E') {
+			if (maps[node.x].charAt(node.y) ==c) {
+				startY = node.y;
+				startX = node.x;
 				return node.coast;
 			}
 
-			bfs(maps, queue, node);
+			for (int i=0; i< move.length; i++) {
+				int dx = node.x + move[i];
+				int dy = node.y + move[move.length - i - 1];
+				if (dx>=0 && dy>=0 && dx<isVisit.length && dy<isVisit[0].length) {
+					if (!isVisit[dx][dy] && maps[dx].charAt(dy)!='X') {
+						isVisit[dx][dy] = true;
+						queue.offer(new Node(dx,dy, node.coast+1));
+					}
 
+				}
+			}
 		}
 		return -1;
 	}
-
-	private void bfs(String[] maps, Queue<Node> queue, Node node) {
-		for (int i=0; i< move.length; i++) {
-			int dx = node.x + move[i];
-			int dy = node.y + move[move.length - i - 1];
-			if (dx>=0 && dy>=0 && dx<isVisit.length && dy<isVisit[0].length) {
-				if (!isVisit[dx][dy] && maps[dx].charAt(dy)!='X') {
-					isVisit[dx][dy] = true;
-					queue.offer(new Node(dx,dy, node.coast+1));
-				}
-
-			}
-		}
-	}
-
 }
