@@ -1,4 +1,4 @@
-package programmers.programmerstest;
+package programmers;
 
 import java.util.*;
 
