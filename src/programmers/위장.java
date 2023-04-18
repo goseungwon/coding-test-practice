@@ -1,7 +1,6 @@
 package programmers;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 public class 위장 {
 	public int solution(String[][] clothes) {
@@ -19,5 +18,20 @@ public class 위장 {
 		}
 
 		return (count+1) *answer - 1;
+	}
+
+	public int solution2(String[][] clothes) {
+		Map<String, Integer> map = new HashMap<>();
+
+		for (String[] clothe : clothes) {
+			if (map.containsKey(clothe[1]))
+				map.replace(clothe[1], map.get(clothe[1]) + 1);
+			else
+				map.put(clothe[1], 2);
+		}
+
+		int answer = map.values().stream().reduce(1, (a, b) -> a * b);
+
+		return answer-1;
 	}
 }
