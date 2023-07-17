@@ -24,7 +24,7 @@ public class Backjoon11724 {
 		for (int i=0; i<edge; i++) {
 			temp = br.readLine().split(" ");
 			int start = Integer.parseInt(temp[0]);
-			int end = Integer.parseInt(temp[0]);
+			int end = Integer.parseInt(temp[1]);
 			arr[start].add(end);
 			arr[end].add(start);
 		}
