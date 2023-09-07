@@ -25,7 +25,6 @@ public class num1
             for(int k=0; k<returnarr.length; k++){
                 if(returnarr[k]==0) break;
                 System.out.println(returnarr[k]);
-
             }
         }else{
             System.out.println(-1);
