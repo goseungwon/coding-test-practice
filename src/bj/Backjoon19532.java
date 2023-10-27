@@ -11,7 +11,7 @@ public class Backjoon19532 {
 
 		int[] input = new int[stringInput.length];
 
-		for (int i=0; i<stringInput.length; i++) {
+		for (int i = 0; i < stringInput.length; i++) {
 			input[i] = Integer.parseInt(stringInput[i]);
 		}
 
@@ -22,15 +22,8 @@ public class Backjoon19532 {
 		int e = input[4];
 		int f = input[5];
 
-		b *= d;
-		c *= d;
-
-		d *= -a;
-		e *= -a;
-		f *= -a;
-
-		int y = (c+f) / (b+e);
-		int x = (f - y * e) / d;
+		int x = (c * e - b * f) / (a * e - b * d);
+		int y = (c * d - a * f) / (b * d - a * e);
 
 		System.out.println(x + " " + y);
 	}
