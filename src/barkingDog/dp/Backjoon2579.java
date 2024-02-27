@@ -12,7 +12,8 @@ public class Backjoon2579 {
 	private static StringTokenizer st;
 	private static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 	static int[] pointMap;
-	static int[][] maxPoint;
+	static int[] minPoint;
+	static int result = 0;
 
 	public static void main(String[] args) throws IOException {
 	  init();
@@ -23,32 +24,35 @@ public class Backjoon2579 {
 	private static void init() throws IOException {
 		int N = Integer.parseInt(br.readLine());
 		pointMap = new int[N];
-		maxPoint = new int[N][3];
+		minPoint = new int[N];
 
 		for (int i=0; i<N; i++) {
 			pointMap[i] = Integer.parseInt(br.readLine());
+			result += pointMap[i];
 		}
 	}
 
 	private static void solve() {
 		//초기값
-		maxPoint[0][1]=pointMap[0];
-		maxPoint[0][2]=0;
+		minPoint[0] = 0;
 
-		if (pointMap.length==1) {
+		if (pointMap.length < 3) {
 			return;
 		}
 
-		maxPoint[1][1]=pointMap[1];
-		maxPoint[1][2]=pointMap[1] + pointMap[0];
+		minPoint[1] = pointMap[0];
+		minPoint[2] = pointMap[1];
 
-		for (int i=2; i< pointMap.length; i++) {
-			maxPoint[i][1] = Math.max(maxPoint[i-2][1], maxPoint[i-2][2]) + pointMap[i];
-			maxPoint[i][2] = maxPoint[i-1][1] + pointMap[i];
+		for (int i=3; i<pointMap.length; i++) {
+			minPoint[i] = pointMap[i-1] + Math.min(minPoint[i-2], minPoint[i-3]);
 		}
 	}
 
 	private static void print() {
-		System.out.println(Math.max(maxPoint[maxPoint.length-1][1], maxPoint[maxPoint.length-1][2]));
+		if (minPoint.length < 2) {
+			System.out.println(result - minPoint[minPoint.length-1]);
+		} else {
+			System.out.println(result - Math.min(minPoint[minPoint.length-1], minPoint[minPoint.length-2]));
+		}
 	}
 }
